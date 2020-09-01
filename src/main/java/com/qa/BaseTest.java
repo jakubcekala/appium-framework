@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +21,9 @@ public class BaseTest {
     protected Properties props;
     InputStream inputStream;
 
+    @Parameters({"platformName", "platformVersion", "deviceName"})
     @BeforeTest
-    public void beforeTest() {
+    public void beforeTest(String platformName, String platformVersion, String deviceName) {
 
         try {
 
@@ -32,9 +34,9 @@ public class BaseTest {
             props.load(inputStream);
 
             DesiredCapabilities caps = new DesiredCapabilities();
-            caps.setCapability("platformName", "Android");
-            caps.setCapability("platformVersion", "9.0");
-            caps.setCapability("deviceName", "device name");
+            caps.setCapability("platformName", platformName);
+            caps.setCapability("platformVersion", platformVersion);
+            caps.setCapability("deviceName", deviceName);
             caps.setCapability("automationName", props.getProperty("androidAutomationName"));
             caps.setCapability("appPackage", props.getProperty("androidAppPackage"));
             caps.setCapability("appActivity", props.getProperty("androidAppActivity"));
