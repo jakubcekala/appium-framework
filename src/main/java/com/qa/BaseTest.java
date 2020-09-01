@@ -65,6 +65,21 @@ public class BaseTest {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void click(MobileElement element) {
+        waitForVisibility(element);
+        element.click();
+    }
+
+    public void sendKeys(MobileElement element, String text) {
+        waitForVisibility(element);
+        element.sendKeys(text);
+    }
+
+    public void getAttribute(MobileElement element, String attribute) {
+        waitForVisibility(element);
+        element.getAttribute(attribute);
+    }
+
     @AfterTest
     public void afterTest() {
 
