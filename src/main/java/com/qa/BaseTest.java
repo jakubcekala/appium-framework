@@ -5,27 +5,31 @@ import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.WebDriver;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
     protected AppiumDriver driver;
     protected Properties props;
     InputStream inputStream;
+
+    public BaseTest() {
+        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+    }
 
     @Parameters({"platformName", "platformVersion", "deviceName"})
     @BeforeTest
@@ -82,7 +86,7 @@ public class BaseTest {
 
     @AfterTest
     public void afterTest() {
-
+        driver.quit();
     }
 
 }
