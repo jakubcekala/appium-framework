@@ -1,6 +1,7 @@
 package com.qa;
 
 
+import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -60,7 +61,7 @@ public class BaseTest {
     }
 
     public void waitForVisibility(MobileElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebDriverWait wait = new WebDriverWait(driver, TestUtils.WAIT);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
