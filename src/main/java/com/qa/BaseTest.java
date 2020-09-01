@@ -79,9 +79,9 @@ public class BaseTest {
         element.sendKeys(text);
     }
 
-    public void getAttribute(MobileElement element, String attribute) {
+    public String getAttribute(MobileElement element, String attribute) {
         waitForVisibility(element);
-        element.getAttribute(attribute);
+        return element.getAttribute(attribute);
     }
 
     @AfterTest
