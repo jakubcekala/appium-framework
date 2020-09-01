@@ -21,7 +21,7 @@ public class LoginTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod(Method method) {
         loginPage = new LoginPage();
-        System.out.println("\n********** starting tes: " + method.getName() + "**********\n");
+        System.out.println("\n********** starting test: " + method.getName() + " **********\n");
     }
 
     @Test
