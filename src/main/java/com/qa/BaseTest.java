@@ -23,8 +23,8 @@ import java.util.Properties;
 
 public class BaseTest {
 
-    protected AppiumDriver driver;
-    protected Properties props;
+    protected static AppiumDriver driver;
+    protected static Properties props;
     InputStream inputStream;
 
     public BaseTest() {

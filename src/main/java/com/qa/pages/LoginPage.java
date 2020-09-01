@@ -24,7 +24,7 @@ public class LoginPage extends BaseTest {
         return this;
     }
 
-    public ProductsPage clickLoginButton() {
+    public ProductsPage pressLoginButton() {
         click(loginButton);
         return new ProductsPage();
     }
