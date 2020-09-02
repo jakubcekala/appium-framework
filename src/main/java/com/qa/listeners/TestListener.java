@@ -1,12 +1,12 @@
 package com.qa.listeners;
 
-import org.testng.ITestNGListener;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class TestListener implements ITestNGListener {
+public class TestListener implements ITestListener {
 
     public void onTestFailure(ITestResult result) {
         if (result.getThrowable() != null) {
