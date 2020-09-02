@@ -60,7 +60,7 @@ public class BaseTest {
             caps.setCapability("automationName", props.getProperty("androidAutomationName"));
             caps.setCapability("appPackage", props.getProperty("androidAppPackage"));
             caps.setCapability("appActivity", props.getProperty("androidAppActivity"));
-            URL appURL = getClass().getClassLoader().getResource("androidAppLocation");
+            String appURL = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
             caps.setCapability("app", appURL);
 
             URL url = new URL("http://0.0.0.0:4723/wd/hub");
