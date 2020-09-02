@@ -63,7 +63,7 @@ public class BaseTest {
             String appURL = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
             caps.setCapability("app", appURL);
 
-            URL url = new URL("http://0.0.0.0:4723/wd/hub");
+            URL url = new URL(props.getProperty("appiumURL"));
             driver = new AndroidDriver(url, caps);
 
             String sessionId = driver.getSessionId().toString();
