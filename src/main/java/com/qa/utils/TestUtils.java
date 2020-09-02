@@ -1,5 +1,41 @@
 package com.qa.utils;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+
 public class TestUtils {
     public static final long WAIT = 10;
+
+    public static HashMap<String, String> parseStringXML(InputStream file) throws ParserConfigurationException, IOException, SAXException {
+        HashMap<String, String> stringMap = new HashMap<String, String>();
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(file);
+        document.getDocumentElement().normalize();
+
+        Element root = document.getDocumentElement();
+
+        NodeList nodeList = document.getElementsByTagName("string");
+
+        for (int temp = 0; temp < nodeList.getLength(); temp++) {
+            Node node = nodeList.item(temp);
+
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element element = (Element) node;
+                stringMap.put(element.getAttribute("name"), element.getTextContent());
+            }
+        }
+        return stringMap;
+    }
 }

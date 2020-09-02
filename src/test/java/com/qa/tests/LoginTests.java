@@ -48,7 +48,7 @@ public class LoginTests extends BaseTest {
         loginPage.pressLoginButton();
 
         String actualErrorText = loginPage.getErrorText();
-        String expectedErrorText = "Username and password do not match any user in this service.";
+        String expectedErrorText = strings.get("error_invalid_username_or_password");
         System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
         Assert.assertEquals(actualErrorText, expectedErrorText);
@@ -61,7 +61,7 @@ public class LoginTests extends BaseTest {
         loginPage.pressLoginButton();
 
         String actualErrorText = loginPage.getErrorText();
-        String expectedErrorText = "Username and password do not match any user in this service.";
+        String expectedErrorText = strings.get("error_invalid_username_or_password");;
         System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
         Assert.assertEquals(actualErrorText, expectedErrorText);
@@ -74,7 +74,7 @@ public class LoginTests extends BaseTest {
         productsPage = loginPage.pressLoginButton();
 
         String actualTitle = productsPage.getTitle();
-        String expectedTitle = "PRODUCTS";
+        String expectedTitle = strings.get("product_title");;
         System.out.println("Actual title: " + actualTitle + "\n" + "Expected title: " + expectedTitle);
 
         Assert.assertEquals(actualTitle, expectedTitle);
