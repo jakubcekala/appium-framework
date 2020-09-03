@@ -5,6 +5,7 @@ import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -41,6 +42,7 @@ public class BaseTest {
     @BeforeTest
     public void beforeTest(String platformName, String platformVersion, String deviceName) throws Exception {
 
+        URL url;
         try {
 
             props = new Properties();
@@ -57,14 +59,29 @@ public class BaseTest {
             caps.setCapability("platformName", platformName);
             caps.setCapability("platformVersion", platformVersion);
             caps.setCapability("deviceName", deviceName);
-            caps.setCapability("automationName", props.getProperty("androidAutomationName"));
-            caps.setCapability("appPackage", props.getProperty("androidAppPackage"));
-            caps.setCapability("appActivity", props.getProperty("androidAppActivity"));
-            String appURL = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
-            caps.setCapability("app", appURL);
+            switch (platformName) {
+                case "Android":
+                    caps.setCapability("automationName", props.getProperty("androidAutomationName"));
+                    caps.setCapability("appPackage", props.getProperty("androidAppPackage"));
+                    caps.setCapability("appActivity", props.getProperty("androidAppActivity"));
+                    String androidAppURL = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
+                    caps.setCapability("app", androidAppURL);
 
-            URL url = new URL(props.getProperty("appiumURL"));
-            driver = new AndroidDriver(url, caps);
+                    url = new URL(props.getProperty("appiumURL"));
+                    driver = new AndroidDriver(url, caps);
+                    break;
+                case "iOS":
+                    caps.setCapability("automationName", props.getProperty("iOSAutomationName"));
+                    caps.setCapability("bundleId", props.getProperty("iOSBundleId"));
+                    String iOSAppURL = getClass().getResource(props.getProperty("iOSAppLocation")).getFile();
+                    caps.setCapability("app", iOSAppURL);
+
+                    url = new URL(props.getProperty("appiumURL"));
+                    driver = new IOSDriver(url, caps);
+                    break;
+                default:
+                    throw new Exception("Invalid platform name! - " + platformName);
+            }
 
             String sessionId = driver.getSessionId().toString();
         } catch (Exception e) {
