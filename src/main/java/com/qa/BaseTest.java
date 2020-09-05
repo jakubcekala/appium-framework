@@ -30,6 +30,7 @@ public class BaseTest {
     protected static AppiumDriver driver;
     protected static Properties props;
     protected static HashMap<String, String> strings = new HashMap<String, String>();
+    protected static String platform;
     InputStream inputStream;
     InputStream stringsis;
 
@@ -38,10 +39,10 @@ public class BaseTest {
 
     }
 
-    @Parameters({"platformName", "platformVersion", "deviceName"})
+    @Parameters({"emulator","platformName", "platformVersion", "deviceName"})
     @BeforeTest
-    public void beforeTest(String platformName, String platformVersion, String deviceName) throws Exception {
-
+    public void beforeTest(String emulator, String platformName, String platformVersion, String deviceName) throws Exception {
+        platform = platformName;
         URL url;
         try {
 
@@ -66,6 +67,10 @@ public class BaseTest {
                     caps.setCapability("appActivity", props.getProperty("androidAppActivity"));
                     String androidAppURL = getClass().getResource(props.getProperty("androidAppLocation")).getFile();
                     caps.setCapability("app", androidAppURL);
+
+                    if (emulator.equalsIgnoreCase("true")) {
+                        caps.setCapability("avd", deviceName);
+                    }
 
                     url = new URL(props.getProperty("appiumURL"));
                     driver = new AndroidDriver(url, caps);
@@ -111,9 +116,26 @@ public class BaseTest {
         element.sendKeys(text);
     }
 
+    public void clear(MobileElement element) {
+        waitForVisibility(element);
+        element.clear();
+    }
+
     public String getAttribute(MobileElement element, String attribute) {
         waitForVisibility(element);
         return element.getAttribute(attribute);
+    }
+
+    public String getText(MobileElement element) {
+        waitForVisibility(element);
+        switch (platform) {
+            case "Android":
+                return getAttribute(element, "text");
+            case "iOS":
+                return getAttribute(element, "label");
+            default:
+                return null;
+        }
     }
 
     @AfterTest
