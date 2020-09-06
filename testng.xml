@@ -8,7 +8,8 @@
         <parameter name="emulator" value="false"/>
         <parameter name="platformName" value="Android"/>
         <parameter name="platformVersion" value="11"/>
-        <parameter name="deviceName" value="Pixel_2"/>
+        <parameter name="udid" value="emulator-5554"/>
+        <parameter name="deviceName" value="Pixel_2_API_30"/>
         <classes>
             <class name="com.qa.tests.LoginTests"/>
         </classes>

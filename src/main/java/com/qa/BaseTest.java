@@ -39,9 +39,9 @@ public class BaseTest {
 
     }
 
-    @Parameters({"emulator","platformName", "platformVersion", "deviceName"})
+    @Parameters({"emulator","platformName", "platformVersion", "udid", "deviceName"})
     @BeforeTest
-    public void beforeTest(String emulator, String platformName, String platformVersion, String deviceName) throws Exception {
+    public void beforeTest(String emulator, String platformName, String platformVersion, String udid, String deviceName) throws Exception {
         platform = platformName;
         URL url;
         try {
@@ -58,7 +58,6 @@ public class BaseTest {
 
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setCapability("platformName", platformName);
-            caps.setCapability("platformVersion", platformVersion);
             caps.setCapability("deviceName", deviceName);
             switch (platformName) {
                 case "Android":
@@ -69,7 +68,10 @@ public class BaseTest {
                     caps.setCapability("app", androidAppURL);
 
                     if (emulator.equalsIgnoreCase("true")) {
+                        caps.setCapability("platformVersion", platformVersion);
                         caps.setCapability("avd", deviceName);
+                    } else {
+                        caps.setCapability("udid", udid);
                     }
 
                     url = new URL(props.getProperty("appiumURL"));
