@@ -10,8 +10,9 @@ public class MenuPage extends BaseTest {
     @iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"test-Menu\"]/XCUIElementTypeOther")
     private MobileElement hamburgerMenuButton;
 
-    public HamburgerMenuPage pressSettingsBtn() {
+    public HamburgerMenuPage pressHamburgerMenuButton() {
         click(hamburgerMenuButton);
+        System.out.println("Hamburger menu button pressed");
         return new HamburgerMenuPage();
     }
 

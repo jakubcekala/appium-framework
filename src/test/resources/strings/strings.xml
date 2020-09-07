@@ -2,4 +2,8 @@
 <resources>
     <string name="error_invalid_username_or_password">Username and password do not match any user in this service.</string>
     <string name="product_title">PRODUCTS</string>
+
+    <!-- Products Page SLB Item -->
+    <string name="products_page_SLB_title">Sauce Labs Backpack</string>
+    <string name="products_page_SLB_price">$29.99</string>
 </resources>
