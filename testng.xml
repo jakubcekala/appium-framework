@@ -12,6 +12,7 @@
         <parameter name="deviceName" value="Pixel_2_API_30"/>
         <classes>
             <class name="com.qa.tests.LoginTests"/>
+            <class name="com.qa.tests.ProductTests"/>
         </classes>
     </test>
 </suite>

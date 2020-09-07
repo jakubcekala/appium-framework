@@ -1,7 +1,9 @@
 package com.qa.tests;
 
 import com.qa.BaseTest;
+import com.qa.pages.HamburgerMenuPage;
 import com.qa.pages.LoginPage;
+import com.qa.pages.ProductDetailsPage;
 import com.qa.pages.ProductsPage;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -15,6 +17,8 @@ public class ProductTests extends BaseTest {
 
     LoginPage loginPage;
     ProductsPage productsPage;
+    HamburgerMenuPage hamburgerMenuPage;
+    ProductDetailsPage productDetailsPage;
     InputStream dataIS;
     JSONObject loginUsers;
 
@@ -58,9 +62,27 @@ public class ProductTests extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Test
+    public void validateProductOnProductsDetailPage() {
+        SoftAssert softAssert = new SoftAssert();
+
+        productDetailsPage = productsPage.pressSLBTitle();
+
+        String SLBTitle = productDetailsPage.getProductTitle();
+        softAssert.assertEquals(SLBTitle, strings.get("product_details_SLB_title"));
+
+        String SLBDescription = productDetailsPage.getProductDescription();
+        softAssert.assertEquals(SLBDescription, strings.get("product_details_SLB_description"));
+
+        productsPage = productDetailsPage.pressBackToProductsButton();
+
+        softAssert.assertAll();
+    }
+
     @AfterMethod
     public void afterMethod() {
-
+         hamburgerMenuPage = productsPage.pressHamburgerMenuButton();
+         loginPage = hamburgerMenuPage.clickLogoutButton();
     }
 
     @AfterClass

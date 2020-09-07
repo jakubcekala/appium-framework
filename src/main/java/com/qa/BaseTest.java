@@ -11,10 +11,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -101,7 +98,13 @@ public class BaseTest {
                 stringsis.close();
             }
         }
-}
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        closeApp();
+        launchApp();
+    }
 
     public void waitForVisibility(MobileElement element) {
         WebDriverWait wait = new WebDriverWait(driver, TestUtils.WAIT);
@@ -138,6 +141,14 @@ public class BaseTest {
             default:
                 return null;
         }
+    }
+
+    public void closeApp() {
+        driver.closeApp();
+    }
+
+    public void launchApp() {
+        driver.launchApp();
     }
 
     @AfterTest
