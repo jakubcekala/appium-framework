@@ -10,9 +10,11 @@ public class ProductsPage extends MenuPage {
     private MobileElement productTitleText;
 
     @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"test-Item title\"])[1]")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"test-Item title\"])[1]")
     private MobileElement SLBTitle;
 
     @AndroidFindBy(xpath = "(//android.widget.TextView[@content-desc=\"test-Price\"])[1]")
+    @iOSXCUITFindBy(xpath = "(//XCUIElementTypeStaticText[@name=\"test-Price\"])[1]")
     private MobileElement SLBPrice;
 
     public String getTitle() {
@@ -32,8 +34,8 @@ public class ProductsPage extends MenuPage {
     }
 
     public ProductDetailsPage pressSLBTitle() {
-        click(SLBTitle);
         System.out.println("Pressed title - " + getText(SLBTitle));
+        click(SLBTitle);
         return new ProductDetailsPage();
     }
 }
