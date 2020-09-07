@@ -46,9 +46,7 @@ public class ProductTests extends BaseTest {
     }
 
     @Test
-
-    @AfterMethod
-    public void afterMethod() {
+    public void validateProductOnProductsPage() {
         SoftAssert softAssert = new SoftAssert();
 
         String SLBTitle = productsPage.getSLBTitle();
@@ -58,6 +56,11 @@ public class ProductTests extends BaseTest {
         softAssert.assertEquals(SLBPrice, strings.get("products_page_SLB_price"));
 
         softAssert.assertAll();
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+
     }
 
     @AfterClass
