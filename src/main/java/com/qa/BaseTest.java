@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Properties;
 
+@SuppressWarnings("rawtypes")
 public class BaseTest {
 
     protected static AppiumDriver driver;
@@ -34,6 +35,7 @@ public class BaseTest {
 
     }
 
+    @SuppressWarnings("rawtypes")
     @Parameters({"emulator","platformName", "platformVersion", "udid", "deviceName"})
     @BeforeTest
     public void beforeTest(String emulator, String platformName, String platformVersion, String udid, String deviceName) throws Exception {
@@ -166,8 +168,7 @@ public class BaseTest {
     }
 
     public void iOSScrollToElement(MobileElement el) {
-        RemoteWebElement element = el;
-        String elementID = element.getId();
+        String elementID = el.getId();
         HashMap<String, String> scrollObject = new HashMap<String, String>();
         scrollObject.put("element", elementID);
         scrollObject.put("toVisible", "sdfnjksdnfkld");
@@ -176,6 +177,10 @@ public class BaseTest {
 
     public String getPlatform() {
         return platform;
+    }
+
+    public AppiumDriver getDriver() {
+        return driver;
     }
 
     @AfterTest

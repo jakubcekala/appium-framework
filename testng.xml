@@ -6,16 +6,12 @@
     </listeners>
     <test name="Test">
         <parameter name="emulator" value="false"/>
-        <parameter name="platformName" value="Android"/>
-        <parameter name="platformVersion" value="10"/>
+        <parameter name="platformName" value="iOS"/>
+        <parameter name="platformVersion" value="13.7"/>
         <parameter name="udid" value="emulator-5554"/>
         <parameter name="deviceName" value="iPhone 11"/>
         <classes>
-            <class name="com.qa.tests.ProductTests">
-                <methods>
-                    <include name="validateProductOnProductsDetailsPage"/>
-                </methods>
-            </class>
+            <class name="com.qa.tests.LoginTests"/>
         </classes>
     </test>
 </suite>
