@@ -71,7 +71,6 @@ public class ProductTests extends BaseTest {
         String SLBTitle = productDetailsPage.getProductTitle();
         softAssert.assertEquals(SLBTitle, strings.get("product_details_SLB_title"));
 
-        productDetailsPage.scrollToElementWithVisibleText(strings.get("product_details_SLB_description"));
         String SLBDescription = productDetailsPage.getProductDescription();
         softAssert.assertEquals(SLBDescription, strings.get("product_details_SLB_description"));
 

@@ -9,6 +9,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -148,18 +149,33 @@ public class BaseTest {
         driver.launchApp();
     }
 
-    public void scrollToElement(String childLocAttr, String childLocValue) {
+    public void androidScrollToElement(String childLocAttr, String childLocValue) {
         ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector()."
                         + childLocAttr + "(\"" + childLocValue + "\"));"
         );
     }
 
-    public void scrollToElementWithVisibleText(String visibleText) {
-        ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
-                        + visibleText + "\").instance(0))"
-        );
+    public void androidScrollToElementWithVisibleText(String visibleText) {
+        if (getPlatform().equalsIgnoreCase("Android")) {
+            ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
+                    "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
+                            + visibleText + "\").instance(0))"
+            );
+        }
+    }
+
+    public void iOSScrollToElement(MobileElement el) {
+        RemoteWebElement element = el;
+        String elementID = element.getId();
+        HashMap<String, String> scrollObject = new HashMap<String, String>();
+        scrollObject.put("element", elementID);
+        scrollObject.put("toVisible", "sdfnjksdnfkld");
+        driver.executeScript("mobile:scroll", scrollObject);
+    }
+
+    public String getPlatform() {
+        return platform;
     }
 
     @AfterTest

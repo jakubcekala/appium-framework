@@ -15,9 +15,11 @@ public class ProductDetailsPage extends MenuPage {
     private MobileElement productDescription;
 
     @AndroidFindBy(accessibility = "test-Price")
+    @iOSXCUITFindBy(id = "test-Price")
     private MobileElement productPrice;
 
     @AndroidFindBy(accessibility = "test-ADD TO CART")
+    @iOSXCUITFindBy(id = "test-ADD TO CART")
     private MobileElement addToCartButton;
 
     @AndroidFindBy(accessibility = "test-BACK TO PRODUCTS")
@@ -43,7 +45,11 @@ public class ProductDetailsPage extends MenuPage {
     }
 
     public ProductDetailsPage scrollToPrice() {
-        scrollToElement("description", "test-Price");
+        if (getPlatform().equalsIgnoreCase("Android")) {
+            androidScrollToElement("description", "test-Price");
+        } else if (getPlatform().equalsIgnoreCase("iOS")) {
+            iOSScrollToElement(productPrice);
+        }
         return this;
     }
 
@@ -53,7 +59,11 @@ public class ProductDetailsPage extends MenuPage {
     }
 
     public ProductDetailsPage scrollToAddToCartButton() {
-        scrollToElement("description", "test-ADD TO CART");
+        if (getPlatform().equalsIgnoreCase("Android")) {
+            androidScrollToElement("description", "test-ADD TO CART");
+        } else if (getPlatform().equalsIgnoreCase("iOS")) {
+            iOSScrollToElement(addToCartButton);
+        }
         return this;
     }
 
