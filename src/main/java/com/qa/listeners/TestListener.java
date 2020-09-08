@@ -34,12 +34,12 @@ public class TestListener implements ITestListener {
                 + parameters.get("platformVersion") + "_" + parameters.get("deviceName") + File.separator
                 + TestUtils.getDateTime() + File.separator + result.getTestClass().getRealClass().getSimpleName()
                 + File.separator + result.getName() + ".png";
-        String completeScreenshotPath = System.getProperty("user.dir") + File.separator + screenshotPath;
         try {
-            FileUtils.copyFile(screenshotFile, new File(screenshotPath));
+            File destFile = new File(screenshotPath);
+            FileUtils.copyFile(screenshotFile, destFile);
             Reporter.log("Screenshot:");
-            Reporter.log("<a href='" + completeScreenshotPath
-                    + "'> <img src='" +completeScreenshotPath
+            Reporter.log("<a href='" + destFile.getAbsolutePath()
+                    + "'> <img src='" + destFile.getAbsolutePath()
                     + "' height='100' width='100'/> </a>");
         } catch (IOException e) {
             e.printStackTrace();
