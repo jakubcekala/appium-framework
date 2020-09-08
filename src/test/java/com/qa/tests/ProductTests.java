@@ -63,7 +63,7 @@ public class ProductTests extends BaseTest {
     }
 
     @Test
-    public void validateProductOnProductsDetailPage() {
+    public void validateProductOnProductsDetailsPage() {
         SoftAssert softAssert = new SoftAssert();
 
         productDetailsPage = productsPage.pressSLBTitle();
@@ -71,8 +71,13 @@ public class ProductTests extends BaseTest {
         String SLBTitle = productDetailsPage.getProductTitle();
         softAssert.assertEquals(SLBTitle, strings.get("product_details_SLB_title"));
 
+        productDetailsPage.scrollToElementWithVisibleText(strings.get("product_details_SLB_description"));
         String SLBDescription = productDetailsPage.getProductDescription();
         softAssert.assertEquals(SLBDescription, strings.get("product_details_SLB_description"));
+
+        productDetailsPage.scrollToPrice();
+        String SLBPrice = productDetailsPage.getProductPrice();
+        softAssert.assertEquals(SLBPrice, strings.get("product_details_SLB_price"));
 
         productsPage = productDetailsPage.pressBackToProductsButton();
 

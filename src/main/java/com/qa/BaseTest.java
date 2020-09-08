@@ -3,6 +3,7 @@ package com.qa;
 
 import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.FindsByAndroidUIAutomator;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -149,6 +150,20 @@ public class BaseTest {
 
     public void launchApp() {
         driver.launchApp();
+    }
+
+    public MobileElement scrollToElement(String childLocAttr, String childLocValue) {
+        return (MobileElement) ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector()."
+                        + childLocAttr + "(\"" + childLocValue + "\"));"
+        );
+    }
+
+    public MobileElement scrollToElementWithVisibleText(String visibleText) {
+        return (MobileElement) ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
+                        + visibleText + "\").instance(0))"
+        );
     }
 
     @AfterTest

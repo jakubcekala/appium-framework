@@ -14,6 +14,9 @@ public class ProductDetailsPage extends MenuPage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Description\"]/child::XCUIElementTypeStaticText[2]")
     private MobileElement productDescription;
 
+    @AndroidFindBy(accessibility = "test-Price")
+    private MobileElement productPrice;
+
     @AndroidFindBy(accessibility = "test-BACK TO PRODUCTS")
     @iOSXCUITFindBy(id = "test-BACK TO PRODUCTS")
     private MobileElement backToProductsButton;
@@ -28,6 +31,17 @@ public class ProductDetailsPage extends MenuPage {
         String description = getText(productDescription);
         System.out.println("Product Description is: " + description);
         return description;
+    }
+
+    public String getProductPrice() {
+        String price = getText(productPrice);
+        System.out.println("Product Price is: " + price);
+        return price;
+    }
+
+    public ProductDetailsPage scrollToPrice() {
+        scrollToElement("description", "test-Price");
+        return this;
     }
 
     public ProductsPage pressBackToProductsButton() {
