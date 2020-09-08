@@ -79,6 +79,9 @@ public class ProductTests extends BaseTest {
         String SLBPrice = productDetailsPage.getProductPrice();
         softAssert.assertEquals(SLBPrice, strings.get("product_details_SLB_price"));
 
+        productDetailsPage.scrollToAddToCartButton();
+        softAssert.assertEquals(productDetailsPage.isAddToCartButtonDisplayed(), true);
+
         productsPage = productDetailsPage.pressBackToProductsButton();
 
         softAssert.assertAll();

@@ -17,6 +17,9 @@ public class ProductDetailsPage extends MenuPage {
     @AndroidFindBy(accessibility = "test-Price")
     private MobileElement productPrice;
 
+    @AndroidFindBy(accessibility = "test-ADD TO CART")
+    private MobileElement addToCartButton;
+
     @AndroidFindBy(accessibility = "test-BACK TO PRODUCTS")
     @iOSXCUITFindBy(id = "test-BACK TO PRODUCTS")
     private MobileElement backToProductsButton;
@@ -42,6 +45,20 @@ public class ProductDetailsPage extends MenuPage {
     public ProductDetailsPage scrollToPrice() {
         scrollToElement("description", "test-Price");
         return this;
+    }
+
+    public ProductDetailsPage pressAddToCartButton() {
+        click(addToCartButton);
+        return this;
+    }
+
+    public ProductDetailsPage scrollToAddToCartButton() {
+        scrollToElement("description", "test-ADD TO CART");
+        return this;
+    }
+
+    public boolean isAddToCartButtonDisplayed() {
+        return addToCartButton.isDisplayed();
     }
 
     public ProductsPage pressBackToProductsButton() {
