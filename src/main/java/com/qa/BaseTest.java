@@ -13,12 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Properties;
@@ -152,15 +148,15 @@ public class BaseTest {
         driver.launchApp();
     }
 
-    public MobileElement scrollToElement(String childLocAttr, String childLocValue) {
-        return (MobileElement) ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
+    public void scrollToElement(String childLocAttr, String childLocValue) {
+        ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector()."
                         + childLocAttr + "(\"" + childLocValue + "\"));"
         );
     }
 
-    public MobileElement scrollToElementWithVisibleText(String visibleText) {
-        return (MobileElement) ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
+    public void scrollToElementWithVisibleText(String visibleText) {
+        ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
                         + visibleText + "\").instance(0))"
         );
