@@ -9,11 +9,13 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -22,7 +24,6 @@ import java.util.Properties;
 
 @SuppressWarnings("rawtypes")
 public class BaseTest {
-
     protected static AppiumDriver driver;
     protected static Properties props;
     protected static HashMap<String, String> strings = new HashMap<String, String>();
@@ -36,13 +37,12 @@ public class BaseTest {
     }
 
     @SuppressWarnings("rawtypes")
-    @Parameters({"emulator","platformName", "platformVersion", "udid", "deviceName"})
+    @Parameters({"emulator", "platformName", "platformVersion", "udid", "deviceName"})
     @BeforeTest
     public void beforeTest(String emulator, String platformName, String platformVersion, String udid, String deviceName) throws Exception {
         platform = platformName;
         URL url;
         try {
-
             props = new Properties();
             String propsFileName = "config.properties";
             String stringsXMLFileName = "strings/strings.xml";
@@ -187,5 +187,4 @@ public class BaseTest {
     public void afterTest() {
         driver.quit();
     }
-
 }

@@ -61,10 +61,10 @@ public class LoginTests extends BaseTest {
         loginPage.pressLoginButton();
 
         String actualErrorText = loginPage.getErrorText();
-        String expectedErrorText = strings.get("error_invalid_username_or_password");;
+        String expectedErrorText = strings.get("error_invalid_username_or_password");
         System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
-        Assert.assertEquals(actualErrorText, expectedErrorText);
+        Assert.assertEquals(actualErrorText, expectedErrorText + "asdasd");
     }
 
     @Test
@@ -74,19 +74,9 @@ public class LoginTests extends BaseTest {
         productsPage = loginPage.pressLoginButton();
 
         String actualTitle = productsPage.getTitle();
-        String expectedTitle = strings.get("product_title");;
+        String expectedTitle = strings.get("product_title");
         System.out.println("Actual title: " + actualTitle + "\n" + "Expected title: " + expectedTitle);
 
         Assert.assertEquals(actualTitle, expectedTitle);
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-
-    }
-
-    @AfterClass
-    public void afterClass() {
-
     }
 }

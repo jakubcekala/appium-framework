@@ -6,8 +6,8 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class MenuPage extends BaseTest {
-    @AndroidFindBy(xpath="//android.view.ViewGroup[@content-desc=\"test-Menu\"]/android.view.ViewGroup/android.widget.ImageView\n" + "")
-    @iOSXCUITFindBy(xpath="//XCUIElementTypeOther[@name=\"test-Menu\"]/XCUIElementTypeOther")
+    @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Menu\"]/android.view.ViewGroup/android.widget.ImageView\n" + "")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Menu\"]/XCUIElementTypeOther")
     private MobileElement hamburgerMenuButton;
 
     public HamburgerMenuPage pressHamburgerMenuButton() {
@@ -15,5 +15,4 @@ public class MenuPage extends BaseTest {
         System.out.println("Hamburger menu button pressed");
         return new HamburgerMenuPage();
     }
-
 }

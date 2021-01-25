@@ -3,7 +3,6 @@ package com.qa.listeners;
 import com.qa.BaseTest;
 import com.qa.utils.TestUtils;
 import org.apache.commons.io.FileUtils;
-import org.aspectj.util.FileUtil;
 import org.openqa.selenium.OutputType;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -13,11 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 public class TestListener implements ITestListener {
-
     public void onTestFailure(ITestResult result) {
         if (result.getThrowable() != null) {
             StringWriter sw = new StringWriter();

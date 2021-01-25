@@ -88,12 +88,7 @@ public class ProductTests extends BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-         hamburgerMenuPage = productsPage.pressHamburgerMenuButton();
-         loginPage = hamburgerMenuPage.clickLogoutButton();
-    }
-
-    @AfterClass
-    public void afterClass() {
-
+        hamburgerMenuPage = productsPage.pressHamburgerMenuButton();
+        loginPage = hamburgerMenuPage.clickLogoutButton();
     }
 }

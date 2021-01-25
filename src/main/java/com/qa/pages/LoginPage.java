@@ -22,9 +22,6 @@ public class LoginPage extends BaseTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Error message\"]/child::XCUIElementTypeStaticText")
     private MobileElement errorText;
 
-    public LoginPage() {
-    }
-
     public LoginPage enterUsername(String username) {
         clear(usernameTextField);
         sendKeys(usernameTextField, username);
