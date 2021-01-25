@@ -64,7 +64,7 @@ public class LoginTests extends BaseTest {
         String expectedErrorText = strings.get("error_invalid_username_or_password");
         System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
-        Assert.assertEquals(actualErrorText, expectedErrorText + "asdasd");
+        Assert.assertEquals(actualErrorText, expectedErrorText);
     }
 
     @Test
