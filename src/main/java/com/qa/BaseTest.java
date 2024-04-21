@@ -68,16 +68,24 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        //closeApp();
+        closeApp();
         launchApp();
     }
 
     public void closeApp() {
-        driver.closeApp();
+        if (driver instanceof AndroidDriver) {
+            driver.terminateApp(props.getProperty("androidAppPackage"));
+        } else if (driver instanceof IOSDriver) {
+            driver.terminateApp(props.getProperty("iOSBundleId"));
+        }
     }
 
     public void launchApp() {
-        driver.launchApp();
+        if (driver instanceof AndroidDriver) {
+            driver.activateApp(props.getProperty("androidAppPackage"));
+        } else if (driver instanceof IOSDriver) {
+            driver.activateApp(props.getProperty("iOSBundleId"));
+        }
     }
 
     public String getPlatform() {
