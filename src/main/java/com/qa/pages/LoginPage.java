@@ -1,11 +1,12 @@
 package com.qa.pages;
 
-import com.qa.BaseTest;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
-public class LoginPage extends BaseTest {
+public class LoginPage extends BasePage {
+
     @AndroidFindBy(accessibility = "test-Username")
     @iOSXCUITFindBy(id = "test-Username")
     private MobileElement usernameTextField;
@@ -21,6 +22,10 @@ public class LoginPage extends BaseTest {
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Error message\"]/android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Error message\"]/child::XCUIElementTypeStaticText")
     private MobileElement errorText;
+
+    public LoginPage(AppiumDriver driver) {
+        super(driver);
+    }
 
     public LoginPage enterUsername(String username) {
         clear(usernameTextField);
@@ -39,7 +44,7 @@ public class LoginPage extends BaseTest {
     public ProductsPage pressLoginButton() {
         click(loginButton);
         System.out.println("Login button pressed");
-        return new ProductsPage();
+        return new ProductsPage(driver);
     }
 
     public ProductsPage login(String username, String password) {

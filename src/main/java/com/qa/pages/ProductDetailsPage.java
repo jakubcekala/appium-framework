@@ -1,10 +1,12 @@
 package com.qa.pages;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
-public class ProductDetailsPage extends MenuPage {
+public class ProductDetailsPage extends BasePage {
+
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Description\"]/android.widget.TextView[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Description\"]/child::XCUIElementTypeStaticText[1]")
     private MobileElement productTitle;
@@ -25,6 +27,10 @@ public class ProductDetailsPage extends MenuPage {
     @iOSXCUITFindBy(id = "test-BACK TO PRODUCTS")
     private MobileElement backToProductsButton;
 
+    public ProductDetailsPage(AppiumDriver driver) {
+        super(driver);
+    }
+
     public String getProductTitle() {
         String title = getText(productTitle);
         System.out.println("Product Title is: " + title);
@@ -44,11 +50,7 @@ public class ProductDetailsPage extends MenuPage {
     }
 
     public ProductDetailsPage scrollToPrice() {
-        if (getPlatform().equalsIgnoreCase("Android")) {
-            androidScrollToElement("description", "test-Price");
-        } else if (getPlatform().equalsIgnoreCase("iOS")) {
-            iOSScrollToElement(productPrice);
-        }
+        scrollToElement(productPrice,"description", "test-Price");
         return this;
     }
 
@@ -58,11 +60,7 @@ public class ProductDetailsPage extends MenuPage {
     }
 
     public ProductDetailsPage scrollToAddToCartButton() {
-        if (getPlatform().equalsIgnoreCase("Android")) {
-            androidScrollToElement("description", "test-ADD TO CART");
-        } else if (getPlatform().equalsIgnoreCase("iOS")) {
-            iOSScrollToElement(addToCartButton);
-        }
+        scrollToElement(productPrice, "description", "test-ADD TO CART");
         return this;
     }
 
@@ -73,6 +71,6 @@ public class ProductDetailsPage extends MenuPage {
     public ProductsPage pressBackToProductsButton() {
         click(backToProductsButton);
         System.out.println("Pressed \"Back to products\" button");
-        return new ProductsPage();
+        return new ProductsPage(driver);
     }
 }
