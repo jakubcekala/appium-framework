@@ -5,18 +5,9 @@ import com.qa.capabilities.AndroidCapability;
 import com.qa.capabilities.iOSCapability;
 import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.FindsByAndroidUIAutomator;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -31,11 +22,6 @@ public class BaseTest {
     protected static String platform;
     InputStream inputStream;
     InputStream stringsis;
-
-    public BaseTest() {
-        PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-
-    }
 
     @SuppressWarnings("rawtypes")
     @Parameters({"emulator", "platformName", "platformVersion", "udid", "deviceName"})
@@ -61,7 +47,7 @@ public class BaseTest {
                     driver = new AndroidDriver(url, androidCaps);
                     break;
                 case "iOS":
-                    iOSCapability iOSCaps = new iOSCapability(platformName, deviceName);
+                    iOSCapability iOSCaps = new iOSCapability(platformName, deviceName, udid, platformVersion);
                     url = new URL(props.getProperty("appiumURL"));
                     driver = new IOSDriver(url, iOSCaps);
                     break;
@@ -86,73 +72,20 @@ public class BaseTest {
         launchApp();
     }
 
-    public void waitForVisibility(MobileElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, TestUtils.WAIT);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void click(MobileElement element) {
-        waitForVisibility(element);
-        element.click();
-    }
-
-    public void sendKeys(MobileElement element, String text) {
-        waitForVisibility(element);
-        element.sendKeys(text);
-    }
-
-    public void clear(MobileElement element) {
-        waitForVisibility(element);
-        element.clear();
-    }
-
-    public String getAttribute(MobileElement element, String attribute) {
-        waitForVisibility(element);
-        return element.getAttribute(attribute);
-    }
-
-    public String getText(MobileElement element) {
-        waitForVisibility(element);
-        switch (platform) {
-            case "Android":
-                return getAttribute(element, "text");
-            case "iOS":
-                return getAttribute(element, "label");
-            default:
-                return null;
-        }
-    }
-
     public void closeApp() {
-        driver.closeApp();
+        if (driver instanceof AndroidDriver) {
+            driver.terminateApp(props.getProperty("androidAppPackage"));
+        } else if (driver instanceof IOSDriver) {
+            driver.terminateApp(props.getProperty("iOSBundleId"));
+        }
     }
 
     public void launchApp() {
-        driver.launchApp();
-    }
-
-    public void androidScrollToElement(String childLocAttr, String childLocValue) {
-        ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector()."
-                        + childLocAttr + "(\"" + childLocValue + "\"));"
-        );
-    }
-
-    public void androidScrollToElementWithVisibleText(String visibleText) {
-        if (getPlatform().equalsIgnoreCase("Android")) {
-            ((FindsByAndroidUIAutomator) driver).findElementByAndroidUIAutomator(
-                    "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
-                            + visibleText + "\").instance(0))"
-            );
+        if (driver instanceof AndroidDriver) {
+            driver.activateApp(props.getProperty("androidAppPackage"));
+        } else if (driver instanceof IOSDriver) {
+            driver.activateApp(props.getProperty("iOSBundleId"));
         }
-    }
-
-    public void iOSScrollToElement(MobileElement el) {
-        String elementID = el.getId();
-        HashMap<String, String> scrollObject = new HashMap<String, String>();
-        scrollObject.put("element", elementID);
-        scrollObject.put("toVisible", "sdfnjksdnfkld");
-        driver.executeScript("mobile:scroll", scrollObject);
     }
 
     public String getPlatform() {
