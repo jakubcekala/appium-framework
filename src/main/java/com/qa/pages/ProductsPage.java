@@ -24,24 +24,24 @@ public class ProductsPage extends BasePage {
     }
 
     public String getTitle() {
-        return getText(productTitleText);
+        return actions.getText(productTitleText);
     }
 
     public String getSLBTitle() {
-        String title = getText(SLBTitle);
+        String title = actions.getText(SLBTitle);
         System.out.println("Product page title: " + title);
         return title;
     }
 
     public String getSLBPrice() {
-        String price = getText(SLBPrice);
+        String price = actions.getText(SLBPrice);
         System.out.println("Product page price: " + price);
         return price;
     }
 
     public ProductDetailsPage pressSLBTitle() {
-        System.out.println("Pressed title - " + getText(SLBTitle));
-        click(SLBTitle);
+        System.out.println("Pressed title - " + actions.getText(SLBTitle));
+        actions.click(SLBTitle);
         return new ProductDetailsPage(driver);
     }
 }
