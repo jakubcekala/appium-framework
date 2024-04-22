@@ -7,8 +7,11 @@ import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.testng.annotations.*;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
@@ -18,7 +21,7 @@ import java.util.Properties;
 public class BaseTest {
     protected static AppiumDriver driver;
     protected static Properties props;
-    protected static HashMap<String, String> strings = new HashMap<String, String>();
+    protected static HashMap<String, String> strings = new HashMap<>();
     protected static String platform;
     InputStream inputStream;
     InputStream stringsis;
@@ -68,7 +71,6 @@ public class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        closeApp();
         launchApp();
     }
 
@@ -94,6 +96,19 @@ public class BaseTest {
 
     public AppiumDriver getDriver() {
         return driver;
+    }
+
+    public JSONObject getTestDataJson(String path) throws IOException {
+        InputStream dataIS = getClass().getClassLoader().getResourceAsStream(path);
+        JSONTokener tokener = new JSONTokener(dataIS);
+        JSONObject JSONObject = new JSONObject(tokener);
+        dataIS.close();
+        return JSONObject;
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        closeApp();
     }
 
     @AfterTest
