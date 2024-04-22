@@ -32,35 +32,35 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public String getProductTitle() {
-        String title = getText(productTitle);
+        String title = actions.getText(productTitle);
         System.out.println("Product Title is: " + title);
         return title;
     }
 
     public String getProductDescription() {
-        String description = getText(productDescription);
+        String description = actions.getText(productDescription);
         System.out.println("Product Description is: " + description);
         return description;
     }
 
     public String getProductPrice() {
-        String price = getText(productPrice);
+        String price = actions.getText(productPrice);
         System.out.println("Product Price is: " + price);
         return price;
     }
 
     public ProductDetailsPage scrollToPrice() {
-        scrollToElement(productPrice,"description", "test-Price");
+        actions.scrollToElement(productPrice,"description", "test-Price");
         return this;
     }
 
     public ProductDetailsPage pressAddToCartButton() {
-        click(addToCartButton);
+        actions.click(addToCartButton);
         return this;
     }
 
     public ProductDetailsPage scrollToAddToCartButton() {
-        scrollToElement(productPrice, "description", "test-ADD TO CART");
+        actions.scrollToElement(productPrice, "description", "test-ADD TO CART");
         return this;
     }
 
@@ -69,7 +69,7 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public ProductsPage pressBackToProductsButton() {
-        click(backToProductsButton);
+        actions.click(backToProductsButton);
         System.out.println("Pressed \"Back to products\" button");
         return new ProductsPage(driver);
     }

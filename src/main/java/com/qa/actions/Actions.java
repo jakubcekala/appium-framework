@@ -8,11 +8,9 @@ import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.HashMap;
+public abstract class Actions {
 
-public class Actions {
-
-    private AppiumDriver driver;
+    private final AppiumDriver driver;
 
     public Actions(AppiumDriver driver) {
         this.driver = driver;
@@ -53,25 +51,5 @@ public class Actions {
         return text;
     }
 
-    public void scrollToElement(MobileElement el, String childLocAttr, String childLocValue) {
-        if (driver instanceof AndroidDriver) {
-            ((AndroidDriver) driver).findElementByAndroidUIAutomator(
-                    "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector()."
-                            + childLocAttr + "(\"" + childLocValue + "\"));"
-            );
-        } else if (driver instanceof IOSDriver) {
-            String elementID = el.getId();
-            HashMap<String, String> scrollObject = new HashMap<String, String>();
-            scrollObject.put("element", elementID);
-            scrollObject.put("toVisible", "sdfnjksdnfkld");
-            driver.executeScript("mobile:scroll", scrollObject);
-        }
-    }
-
-    public void androidScrollToElementWithVisibleText(String visibleText) {
-        ((AndroidDriver) driver).findElementByAndroidUIAutomator(
-                "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().textContains(\""
-                        + visibleText + "\").instance(0))"
-        );
-    }
+    public abstract void scrollToElement(MobileElement el, String childLocAttr, String childLocValue);
 }

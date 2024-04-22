@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<!--<suite name="Suite" parallel="false">-->
-<!--    <listeners>-->
-<!--        <listener class-name="com.qa.listeners.TestListener"/>-->
-<!--    </listeners>-->
-<!--    <test name="Test">-->
-<!--        <parameter name="emulator" value="true"/>-->
-<!--        <parameter name="platformName" value="Android"/>-->
-<!--        <parameter name="platformVersion" value="13"/>-->
-<!--        <parameter name="udid" value="emulator-5554"/>-->
-<!--        <parameter name="deviceName" value="Pixel_7_API_33"/>-->
-<!--        <classes>-->
-<!--            <class name="com.qa.tests.LoginTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--</suite>-->
-
 <suite name="Suite" parallel="false">
     <listeners>
         <listener class-name="com.qa.listeners.TestListener"/>
     </listeners>
     <test name="Test">
         <parameter name="emulator" value="true"/>
-        <parameter name="platformName" value="iOS"/>
-        <parameter name="platformVersion" value="17.2"/>
-        <parameter name="udid" value="E0788B37-89C6-4E31-8A5C-171D36413817"/>
-        <parameter name="deviceName" value="iPhone 15"/>
+        <parameter name="platformName" value="Android"/>
+        <parameter name="platformVersion" value="13"/>
+        <parameter name="udid" value="emulator-5554"/>
+        <parameter name="deviceName" value="Pixel_7_API_33"/>
         <classes>
             <class name="com.qa.tests.LoginTests"/>
+            <class name="com.qa.tests.ProductTests"/>
         </classes>
     </test>
 </suite>
+
+<!--<suite name="Suite" parallel="false">-->
+<!--    <listeners>-->
+<!--        <listener class-name="com.qa.listeners.TestListener"/>-->
+<!--    </listeners>-->
+<!--    <test name="Test">-->
+<!--        <parameter name="emulator" value="true"/>-->
+<!--        <parameter name="platformName" value="iOS"/>-->
+<!--        <parameter name="platformVersion" value="17.2"/>-->
+<!--        <parameter name="udid" value="E0788B37-89C6-4E31-8A5C-171D36413817"/>-->
+<!--        <parameter name="deviceName" value="iPhone 15"/>-->
+<!--        <classes>-->
+<!--            <class name="com.qa.tests.LoginTests"/>-->
+<!--            <class name="com.qa.tests.ProductTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+<!--</suite>-->

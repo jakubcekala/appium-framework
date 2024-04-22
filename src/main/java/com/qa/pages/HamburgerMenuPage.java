@@ -20,14 +20,14 @@ public class HamburgerMenuPage extends BasePage {
     }
 
     public LoginPage clickLogoutButton() {
-        waitForVisibility(logoutButton);
-        click(logoutButton);
+        actions.waitForVisibility(logoutButton);
+        actions.click(logoutButton);
         return new LoginPage(driver);
     }
 
     public ProductsPage clickCloseButton() {
-        waitForVisibility(closeButton);
-        click(closeButton);
+        actions.waitForVisibility(closeButton);
+        actions.click(closeButton);
         return new ProductsPage(driver);
     }
 }
