@@ -1,7 +1,7 @@
 package com.qa.actions;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
+import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
 
@@ -14,8 +14,8 @@ public class IOSActions extends Actions {
         this.driver = driver;
     }
 
-    public void scrollToElement(MobileElement el, String childLocAttr, String childLocValue) {
-        String elementID = el.getId();
+    public void scrollToElement(WebElement el, String childLocAttr, String childLocValue) {
+        String elementID = el.getAttribute("UID");
         HashMap<String, String> scrollObject = new HashMap<>();
         scrollObject.put("element", elementID);
         scrollObject.put("toVisible", "sdfnjksdnfkld");

@@ -2,10 +2,10 @@ package com.qa.pages;
 
 import com.qa.actions.ActionsFactory;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 public class BasePage extends ActionsFactory {
@@ -15,7 +15,7 @@ public class BasePage extends ActionsFactory {
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Menu\"]/android.view.ViewGroup/android.widget.ImageView\n" + "")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Menu\"]/XCUIElementTypeOther")
 
-    private MobileElement hamburgerMenuButton;
+    private WebElement hamburgerMenuButton;
 
     public BasePage(AppiumDriver driver) {
         super(driver);

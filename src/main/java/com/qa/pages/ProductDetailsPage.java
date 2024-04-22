@@ -1,31 +1,31 @@
 package com.qa.pages;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 
 public class ProductDetailsPage extends BasePage {
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Description\"]/android.widget.TextView[1]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Description\"]/child::XCUIElementTypeStaticText[1]")
-    private MobileElement productTitle;
+    private WebElement productTitle;
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Description\"]/android.widget.TextView[2]")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Description\"]/child::XCUIElementTypeStaticText[2]")
-    private MobileElement productDescription;
+    private WebElement productDescription;
 
     @AndroidFindBy(accessibility = "test-Price")
     @iOSXCUITFindBy(id = "test-Price")
-    private MobileElement productPrice;
+    private WebElement productPrice;
 
     @AndroidFindBy(accessibility = "test-ADD TO CART")
     @iOSXCUITFindBy(id = "test-ADD TO CART")
-    private MobileElement addToCartButton;
+    private WebElement addToCartButton;
 
     @AndroidFindBy(accessibility = "test-BACK TO PRODUCTS")
     @iOSXCUITFindBy(id = "test-BACK TO PRODUCTS")
-    private MobileElement backToProductsButton;
+    private WebElement backToProductsButton;
 
     public ProductDetailsPage(AppiumDriver driver) {
         super(driver);

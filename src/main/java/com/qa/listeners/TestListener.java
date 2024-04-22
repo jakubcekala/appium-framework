@@ -2,8 +2,8 @@ package com.qa.listeners;
 
 import com.qa.BaseTest;
 import com.qa.utils.TestUtils;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.io.FileHandler;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
@@ -33,7 +33,7 @@ public class TestListener implements ITestListener {
                 + File.separator + result.getName() + ".png";
         try {
             File destFile = new File(screenshotPath);
-            FileUtils.copyFile(screenshotFile, destFile);
+            FileHandler.copy(screenshotFile, destFile);
             Reporter.log("Screenshot:");
             Reporter.log("<a href='" + destFile.getAbsolutePath()
                     + "'> <img src='" + destFile.getAbsolutePath()

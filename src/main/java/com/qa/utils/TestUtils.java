@@ -13,11 +13,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 
 public class TestUtils {
-    public static final long WAIT = 10;
+    public static final Duration WAIT = Duration.ofSeconds(5000);
 
     public static HashMap<String, String> parseStringXML(InputStream file) throws ParserConfigurationException, IOException, SAXException {
         HashMap<String, String> stringMap = new HashMap<String, String>();

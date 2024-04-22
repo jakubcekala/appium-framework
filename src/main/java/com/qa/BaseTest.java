@@ -76,17 +76,17 @@ public class BaseTest {
 
     public void closeApp() {
         if (driver instanceof AndroidDriver) {
-            driver.terminateApp(props.getProperty("androidAppPackage"));
+            ((AndroidDriver) driver).terminateApp(props.getProperty("androidAppPackage"));
         } else if (driver instanceof IOSDriver) {
-            driver.terminateApp(props.getProperty("iOSBundleId"));
+            ((IOSDriver) driver).terminateApp(props.getProperty("iOSBundleId"));
         }
     }
 
     public void launchApp() {
         if (driver instanceof AndroidDriver) {
-            driver.activateApp(props.getProperty("androidAppPackage"));
+            ((AndroidDriver) driver).activateApp(props.getProperty("androidAppPackage"));
         } else if (driver instanceof IOSDriver) {
-            driver.activateApp(props.getProperty("iOSBundleId"));
+            ((IOSDriver) driver).activateApp(props.getProperty("iOSBundleId"));
         }
     }
 
