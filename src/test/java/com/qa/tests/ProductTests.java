@@ -1,52 +1,32 @@
 package com.qa.tests;
 
 import com.qa.BaseTest;
-import com.qa.pages.HamburgerMenuPage;
 import com.qa.pages.LoginPage;
 import com.qa.pages.ProductDetailsPage;
 import com.qa.pages.ProductsPage;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
-
-import java.io.InputStream;
 import java.lang.reflect.Method;
 
 public class ProductTests extends BaseTest {
 
     LoginPage loginPage;
     ProductsPage productsPage;
-    HamburgerMenuPage hamburgerMenuPage;
     ProductDetailsPage productDetailsPage;
-    InputStream dataIS;
     JSONObject loginUsers;
 
     @BeforeClass
     public void beforeClass() throws Exception {
-        try {
-            String dataFilename = "data/loginUsers.json";
-            dataIS = getClass().getClassLoader().getResourceAsStream(dataFilename);
-            JSONTokener tokener = new JSONTokener(dataIS);
-            loginUsers = new JSONObject(tokener);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        } finally {
-            if (dataIS != null) {
-                dataIS.close();
-            }
-        }
+        loginUsers = getTestDataJson("data/loginUsers.json");
     }
 
     @BeforeMethod
     public void beforeMethod(Method method) {
+        JSONObject validUser = loginUsers.getJSONObject("validUser");
         loginPage = new LoginPage(driver);
         System.out.println("\n********** starting test: " + method.getName() + " **********\n");
-        productsPage = loginPage.login(
-                loginUsers.getJSONObject("validUser").getString("username"),
-                loginUsers.getJSONObject("validUser").getString("password")
-        );
+        productsPage = loginPage.login(validUser.getString("username"), validUser.getString("password"));
     }
 
     @Test
@@ -84,11 +64,5 @@ public class ProductTests extends BaseTest {
         productsPage = productDetailsPage.pressBackToProductsButton();
 
         softAssert.assertAll();
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        hamburgerMenuPage = productsPage.pressHamburgerMenuButton();
-        loginPage = hamburgerMenuPage.clickLogoutButton();
     }
 }
