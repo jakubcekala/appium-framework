@@ -1,27 +1,27 @@
 package com.qa.pages;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
     @AndroidFindBy(accessibility = "test-Username")
     @iOSXCUITFindBy(id = "test-Username")
-    private MobileElement usernameTextField;
+    private WebElement usernameTextField;
 
     @AndroidFindBy(accessibility = "test-Password")
     @iOSXCUITFindBy(id = "test-Password")
-    private MobileElement passwordTextField;
+    private WebElement passwordTextField;
 
     @AndroidFindBy(accessibility = "test-LOGIN")
     @iOSXCUITFindBy(id = "test-LOGIN")
-    private MobileElement loginButton;
+    private WebElement loginButton;
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup[@content-desc=\"test-Error message\"]/android.widget.TextView")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeOther[@name=\"test-Error message\"]/child::XCUIElementTypeStaticText")
-    private MobileElement errorText;
+    private WebElement errorText;
 
     public LoginPage(AppiumDriver driver) {
         super(driver);
