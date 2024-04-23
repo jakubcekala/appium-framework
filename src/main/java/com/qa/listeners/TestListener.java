@@ -1,45 +1,53 @@
 package com.qa.listeners;
 
-import com.qa.BaseTest;
-import com.qa.utils.TestUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.io.FileHandler;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.qa.reports.ExtentReportHelper;
+import com.qa.reports.ScreenshotHelper;
+import io.appium.java_client.AppiumDriver;
+import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.testng.Reporter;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Map;
 
 public class TestListener implements ITestListener {
+
+    private ExtentReports extentReports = ExtentReportHelper.getExtentReport();
+    private static ExtentTest test;
+    private AppiumDriver driver;
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        test = extentReports.createTest(result.getMethod().getMethodName());
+        test.assignCategory(result.getTestClass().getName());
+        stepLog("=========== STARTING TEST: " + result.getMethod().getMethodName() + "===========");
+    }
+
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        test.log(Status.PASS, "Passed");
+    }
+
+    @Override
     public void onTestFailure(ITestResult result) {
-        if (result.getThrowable() != null) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            result.getThrowable().printStackTrace(pw);
-            System.out.println(sw.toString());
-        }
-
-        BaseTest baseTest = new BaseTest();
-        File screenshotFile = baseTest.getDriver().getScreenshotAs(OutputType.FILE);
-
-        Map<String, String> parameters = result.getTestContext().getCurrentXmlTest().getAllParameters();
-        String screenshotPath = "Screenshots" + File.separator + parameters.get("platformName") + "_"
-                + parameters.get("platformVersion") + "_" + parameters.get("deviceName") + File.separator
-                + TestUtils.getDateTime() + File.separator + result.getTestClass().getRealClass().getSimpleName()
-                + File.separator + result.getName() + ".png";
         try {
-            File destFile = new File(screenshotPath);
-            FileHandler.copy(screenshotFile, destFile);
-            Reporter.log("Screenshot:");
-            Reporter.log("<a href='" + destFile.getAbsolutePath()
-                    + "'> <img src='" + destFile.getAbsolutePath()
-                    + "' height='100' width='100'/> </a>");
-        } catch (IOException e) {
+            driver = (AppiumDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        test.addScreenCaptureFromPath(
+                ScreenshotHelper.getScreenshotPath(result.getTestName(), driver),
+                result.getTestName()
+        );
+        test.fail(result.getThrowable());
+    }
+
+    @Override
+    public void onFinish(ITestContext context) {
+        extentReports.flush();
+    }
+
+    public static void stepLog(String message) {
+        test.log(Status.INFO, message);
     }
 }

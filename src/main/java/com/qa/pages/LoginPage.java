@@ -1,5 +1,6 @@
 package com.qa.pages;
 
+import com.qa.listeners.TestListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -28,34 +29,35 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterUsername(String username) {
+        TestListener.stepLog("Username entered: " + username);
         actions.clear(usernameTextField);
         actions.sendKeys(usernameTextField, username);
-        System.out.println("Username entered: " + username);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
+        TestListener.stepLog("Password entered: " + password);
         actions.clear(passwordTextField);
         actions.sendKeys(passwordTextField, password);
-        System.out.println("Password entered: " + password);
         return this;
     }
 
     public ProductsPage pressLoginButton() {
+        TestListener.stepLog("Login button pressed");
         actions.click(loginButton);
-        System.out.println("Login button pressed");
         return new ProductsPage(driver);
     }
 
     public ProductsPage login(String username, String password) {
+        TestListener.stepLog("Login with:\nUsername: " + username + "\nPassword: " + password);
         enterUsername(username);
         enterPassword(password);
-        System.out.println("Login with:\nUsername: " + username + "\nPassword: " + password);
         return pressLoginButton();
     }
 
     public String getErrorText() {
         String error = actions.getText(errorText);
+        TestListener.stepLog("The error is: " + error);
         System.out.println("The error is: " + error);
         return error;
     }

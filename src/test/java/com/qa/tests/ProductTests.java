@@ -25,7 +25,6 @@ public class ProductTests extends BaseTest {
     public void beforeMethod(Method method) {
         JSONObject validUser = loginUsers.getJSONObject("validUser");
         loginPage = new LoginPage(driver);
-        System.out.println("\n********** starting test: " + method.getName() + " **********\n");
         productsPage = loginPage.login(validUser.getString("username"), validUser.getString("password"));
     }
 

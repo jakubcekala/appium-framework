@@ -1,5 +1,6 @@
 package com.qa.pages;
 
+import com.qa.listeners.TestListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -33,44 +34,48 @@ public class ProductDetailsPage extends BasePage {
 
     public String getProductTitle() {
         String title = actions.getText(productTitle);
-        System.out.println("Product Title is: " + title);
+        TestListener.stepLog("Product Title is: " + title);
         return title;
     }
 
     public String getProductDescription() {
         String description = actions.getText(productDescription);
-        System.out.println("Product Description is: " + description);
+        TestListener.stepLog("Product Description is: " + description);
         return description;
     }
 
     public String getProductPrice() {
         String price = actions.getText(productPrice);
-        System.out.println("Product Price is: " + price);
+        TestListener.stepLog("Product Price is: " + price);
         return price;
     }
 
     public ProductDetailsPage scrollToPrice() {
+        TestListener.stepLog("Scrolling to price field");
         actions.scrollToElement(productPrice,"description", "test-Price");
         return this;
     }
 
     public ProductDetailsPage pressAddToCartButton() {
+        TestListener.stepLog("Clicking add to cart button");
         actions.click(addToCartButton);
         return this;
     }
 
     public ProductDetailsPage scrollToAddToCartButton() {
+        TestListener.stepLog("Scrolling to add to cart field");
         actions.scrollToElement(productPrice, "description", "test-ADD TO CART");
         return this;
     }
 
     public boolean isAddToCartButtonDisplayed() {
+        TestListener.stepLog("Checking if add to cart button is displayed");
         return addToCartButton.isDisplayed();
     }
 
     public ProductsPage pressBackToProductsButton() {
+        TestListener.stepLog("Pressed \"Back to products\" button");
         actions.click(backToProductsButton);
-        System.out.println("Pressed \"Back to products\" button");
         return new ProductsPage(driver);
     }
 }

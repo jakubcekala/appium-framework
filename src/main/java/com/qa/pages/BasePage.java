@@ -1,6 +1,7 @@
 package com.qa.pages;
 
 import com.qa.actions.ActionsFactory;
+import com.qa.listeners.TestListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -24,8 +25,8 @@ public class BasePage extends ActionsFactory {
     }
 
     public HamburgerMenuPage pressHamburgerMenuButton() {
+        TestListener.stepLog("Hamburger menu button pressed");
         actions.click(hamburgerMenuButton);
-        System.out.println("Hamburger menu button pressed");
         return new HamburgerMenuPage(driver);
     }
 }

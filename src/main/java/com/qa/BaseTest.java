@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @SuppressWarnings("rawtypes")
 public class BaseTest {
-    protected static AppiumDriver driver;
+    public static AppiumDriver driver;
     protected static Properties props;
     protected static HashMap<String, String> strings = new HashMap<>();
     protected static String platform;

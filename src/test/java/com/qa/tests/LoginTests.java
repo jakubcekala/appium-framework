@@ -21,7 +21,6 @@ public class LoginTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod(Method method) {
         loginPage = new LoginPage(driver);
-        System.out.println("\n********** starting test: " + method.getName() + " **********\n");
     }
 
     @Test
@@ -33,7 +32,6 @@ public class LoginTests extends BaseTest {
 
         String actualErrorText = loginPage.getErrorText();
         String expectedErrorText = strings.get("error_invalid_username_or_password");
-        System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
         Assert.assertEquals(actualErrorText, expectedErrorText);
     }
@@ -47,7 +45,6 @@ public class LoginTests extends BaseTest {
 
         String actualErrorText = loginPage.getErrorText();
         String expectedErrorText = strings.get("error_invalid_username_or_password");
-        System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
         Assert.assertEquals(actualErrorText, expectedErrorText);
     }
@@ -61,7 +58,6 @@ public class LoginTests extends BaseTest {
 
         String actualErrorText = loginPage.getErrorText();
         String expectedErrorText = strings.get("error_locked_user");
-        System.out.println("Actual error: " + actualErrorText + "\n" + "Expected error: " + expectedErrorText);
 
         Assert.assertEquals(actualErrorText, expectedErrorText);
     }
@@ -76,7 +72,6 @@ public class LoginTests extends BaseTest {
 
         String actualTitle = productsPage.getTitle();
         String expectedTitle = strings.get("product_title");
-        System.out.println("Actual title: " + actualTitle + "\n" + "Expected title: " + expectedTitle);
 
         Assert.assertEquals(actualTitle, expectedTitle);
     }
