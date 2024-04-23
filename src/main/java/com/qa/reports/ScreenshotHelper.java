@@ -11,7 +11,10 @@ public class ScreenshotHelper {
 
     public static String getScreenshotPath(String testName, AppiumDriver driver) {
         File source = driver.getScreenshotAs(OutputType.FILE);
-        File destinationFile = new File(System.getProperty("user.dir") + "/reports/" + testName + ".png");
+        File destinationFile = new File(
+                System.getProperty("user.dir") + "/reports/" +
+                        driver.getCapabilities().getCapability("platformName") + testName + ".png"
+        );
         try {
             FileHandler.copy(source, destinationFile);
         } catch (IOException e) {

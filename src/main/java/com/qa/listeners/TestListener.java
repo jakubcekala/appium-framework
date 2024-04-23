@@ -18,8 +18,14 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
+        try {
+            driver = (AppiumDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         test = extentReports.createTest(result.getMethod().getMethodName());
         test.assignCategory(result.getTestClass().getName());
+        test.assignDevice(driver.getCapabilities().getCapability("platformName").toString());
         stepLog("=========== STARTING TEST: " + result.getMethod().getMethodName() + "===========");
     }
 
@@ -30,11 +36,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        try {
-            driver = (AppiumDriver) result.getTestClass().getRealClass().getField("driver").get(result.getInstance());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         test.addScreenCaptureFromPath(
                 ScreenshotHelper.getScreenshotPath(result.getTestName(), driver),
                 result.getTestName()
