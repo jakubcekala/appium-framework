@@ -1,5 +1,6 @@
 package com.qa.pages;
 
+import com.qa.listeners.TestListener;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -24,23 +25,25 @@ public class ProductsPage extends BasePage {
     }
 
     public String getTitle() {
-        return actions.getText(productTitleText);
+        String title = actions.getText(productTitleText);
+        TestListener.stepLog("Product page title: " + title);
+        return title;
     }
 
     public String getSLBTitle() {
         String title = actions.getText(SLBTitle);
-        System.out.println("Product page title: " + title);
+        TestListener.stepLog("Product item title: " + title);
         return title;
     }
 
     public String getSLBPrice() {
         String price = actions.getText(SLBPrice);
-        System.out.println("Product page price: " + price);
+        TestListener.stepLog("Product item price: " + price);
         return price;
     }
 
     public ProductDetailsPage pressSLBTitle() {
-        System.out.println("Pressed title - " + actions.getText(SLBTitle));
+        TestListener.stepLog("Pressed item title - " + actions.getText(SLBTitle));
         actions.click(SLBTitle);
         return new ProductDetailsPage(driver);
     }
