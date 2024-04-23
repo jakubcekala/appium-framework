@@ -23,13 +23,13 @@ public class ProductTests extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod(Method method) {
-        JSONObject validUser = loginUsers.getJSONObject("validUser");
         loginPage = new LoginPage(driver);
-        productsPage = loginPage.login(validUser.getString("username"), validUser.getString("password"));
     }
 
     @Test
     public void validateProductOnProductsPage() {
+        JSONObject validUser = loginUsers.getJSONObject("validUser");
+        productsPage = loginPage.login(validUser.getString("username"), validUser.getString("password"));
         SoftAssert softAssert = new SoftAssert();
 
         String SLBTitle = productsPage.getSLBTitle();
@@ -43,9 +43,11 @@ public class ProductTests extends BaseTest {
 
     @Test
     public void validateProductOnProductsDetailsPage() {
+        JSONObject validUser = loginUsers.getJSONObject("validUser");
+        productsPage = loginPage.login(validUser.getString("username"), validUser.getString("password"));
         SoftAssert softAssert = new SoftAssert();
 
-        productDetailsPage = productsPage.pressSLBTitle();
+        productDetailsPage = productsPage.clickSLBTitle();
 
         String SLBTitle = productDetailsPage.getProductTitle();
         softAssert.assertEquals(SLBTitle, strings.get("product_details_SLB_title"));
@@ -60,7 +62,7 @@ public class ProductTests extends BaseTest {
         productDetailsPage.scrollToAddToCartButton();
         softAssert.assertEquals(productDetailsPage.isAddToCartButtonDisplayed(), true);
 
-        productsPage = productDetailsPage.pressBackToProductsButton();
+        productsPage = productDetailsPage.clickBackToProductsButton();
 
         softAssert.assertAll();
     }

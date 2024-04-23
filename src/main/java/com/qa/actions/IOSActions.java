@@ -18,7 +18,7 @@ public class IOSActions extends Actions {
         String elementID = el.getAttribute("UID");
         HashMap<String, String> scrollObject = new HashMap<>();
         scrollObject.put("element", elementID);
-        scrollObject.put("toVisible", "sdfnjksdnfkld");
+        scrollObject.put("toVisible", "true");
         driver.executeScript("mobile:scroll", scrollObject);
     }
 }

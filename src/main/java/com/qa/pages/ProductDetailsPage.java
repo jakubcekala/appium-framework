@@ -56,7 +56,7 @@ public class ProductDetailsPage extends BasePage {
         return this;
     }
 
-    public ProductDetailsPage pressAddToCartButton() {
+    public ProductDetailsPage clickAddToCartButton() {
         TestListener.stepLog("Clicking add to cart button");
         actions.click(addToCartButton);
         return this;
@@ -73,8 +73,8 @@ public class ProductDetailsPage extends BasePage {
         return addToCartButton.isDisplayed();
     }
 
-    public ProductsPage pressBackToProductsButton() {
-        TestListener.stepLog("Pressed \"Back to products\" button");
+    public ProductsPage clickBackToProductsButton() {
+        TestListener.stepLog("Clicking \"Back to products\" button");
         actions.click(backToProductsButton);
         return new ProductsPage(driver);
     }

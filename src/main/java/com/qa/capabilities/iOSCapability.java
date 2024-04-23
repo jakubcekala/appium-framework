@@ -13,13 +13,13 @@ public class iOSCapability extends DesiredCapabilities {
     public iOSCapability(String platformName, String deviceName, String udid, String platformVersion) throws IOException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propsFileName);
         props.load(inputStream);
-        this.setCapability("platformName", platformName);
-        this.setCapability("deviceName", deviceName);
-        this.setCapability("udid", udid);
-        this.setCapability("platformVersion", platformVersion);
-        this.setCapability("automationName", props.getProperty("iOSAutomationName"));
-        this.setCapability("bundleId", props.getProperty("iOSBundleId"));
+        this.setCapability("platformName", System.getProperty("platformName") != null ? System.getProperty("platformName") : platformName);
+        this.setCapability("deviceName", System.getProperty("deviceName") != null ? System.getProperty("deviceName") : deviceName);
+        this.setCapability("udid", System.getProperty("udid") != null ? System.getProperty("udid") : udid);
+        this.setCapability("platformVersion", System.getProperty("platformVersion") != null ? System.getProperty("platformVersion") : platformVersion);
+        this.setCapability("automationName", System.getProperty("iOSAutomationName") != null ? System.getProperty("iOSAutomationName") : props.getProperty("iOSAutomationName"));
+        this.setCapability("bundleId", System.getProperty("iOSBundleId") != null ? System.getProperty("iOSBundleId") : props.getProperty("iOSBundleId"));
         String iOSAppURL = getClass().getResource(props.getProperty("iOSAppLocation")).getFile();
-        this.setCapability("app", iOSAppURL);
+        this.setCapability("app", System.getProperty("iOSAppURL") != null ? System.getProperty("iOSAppURL") : iOSAppURL);
     }
 }
