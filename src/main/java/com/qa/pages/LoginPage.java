@@ -30,14 +30,12 @@ public class LoginPage extends BasePage {
 
     public LoginPage enterUsername(String username) {
         TestListener.stepLog("Username entered: " + username);
-        actions.clear(usernameTextField);
         actions.sendKeys(usernameTextField, username);
         return this;
     }
 
     public LoginPage enterPassword(String password) {
         TestListener.stepLog("Password entered: " + password);
-        actions.clear(passwordTextField);
         actions.sendKeys(passwordTextField, password);
         return this;
     }

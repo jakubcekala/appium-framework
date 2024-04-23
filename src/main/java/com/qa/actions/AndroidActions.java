@@ -2,7 +2,6 @@ package com.qa.actions;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 
 public class AndroidActions extends Actions {
@@ -15,7 +14,7 @@ public class AndroidActions extends Actions {
     }
 
     public void scrollToElement(WebElement el, String childLocAttr, String childLocValue) {
-        ((AndroidDriver) driver).findElement(AppiumBy.androidUIAutomator(
+        driver.findElement(AppiumBy.androidUIAutomator(
                 "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector()."
                         + childLocAttr + "(\"" + childLocValue + "\"));"
         ));

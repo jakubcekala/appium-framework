@@ -24,8 +24,8 @@ public class BasePage extends ActionsFactory {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    public HamburgerMenuPage pressHamburgerMenuButton() {
-        TestListener.stepLog("Hamburger menu button pressed");
+    public HamburgerMenuPage clickHamburgerMenuButton() {
+        TestListener.stepLog("Clicking on hamburger menu button");
         actions.click(hamburgerMenuButton);
         return new HamburgerMenuPage(driver);
     }

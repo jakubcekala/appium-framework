@@ -42,8 +42,8 @@ public class ProductsPage extends BasePage {
         return price;
     }
 
-    public ProductDetailsPage pressSLBTitle() {
-        TestListener.stepLog("Pressed item title - " + actions.getText(SLBTitle));
+    public ProductDetailsPage clickSLBTitle() {
+        TestListener.stepLog("Clicking item title - " + actions.getText(SLBTitle));
         actions.click(SLBTitle);
         return new ProductDetailsPage(driver);
     }
